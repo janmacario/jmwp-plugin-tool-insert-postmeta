@@ -86,14 +86,23 @@ function jmwp_admin_page_postmeta_insert_tool() {
 			// loop through lines of import data and store to arrays
 			foreach($import_data_lines as $import_data_line) {
 
-				//build script using line
-				$pattern = '/(.*)\t(.*)/';
-				$replacement = 'INSERT INTO wp_postmeta (post_id,meta_key,meta_value) VALUES (\1, \''.$import_data_meta_key.'\', \'\2\');'.PHP_EOL.'INSERT INTO wp_postmeta (post_id,meta_key,meta_value) VALUES (\1, \'_'.$import_data_meta_key.'\', \''.$import_data_acf_field_id.'\');'.PHP_EOL.PHP_EOL;
-				$str = $import_data_line;
+				// extract data from input lines using regex
 
-				// append line to output line
-				//echo '<p>'.$import_data_line.' -- '.preg_replace($pattern, $replacement, $str).'</p>';
-				$output_script.= preg_replace($pattern, $replacement, $str);
+				//set up pattern
+				$pattern = "/(.*)\t(.*)/";
+
+				// get matches
+				preg_match($pattern, $import_data_line, $matches);
+				//print_r($matches);
+
+				//trim and store matches
+				$match1 = trim($matches[1]);
+				$match2 = trim($matches[2]);
+
+				$output_script_line_1 = 'INSERT INTO wp_postmeta (post_id,meta_key,meta_value) VALUES (' . $match1 . ', \''.$import_data_meta_key.'\', \'' . $match2 . '\');';
+				$output_script_line_2 = 'INSERT INTO wp_postmeta (post_id,meta_key,meta_value) VALUES (' . $match1 . ', \'_'.$import_data_meta_key.'\', \''.$import_data_acf_field_id.'\');';
+
+				$output_script .= $output_script_line_1 . PHP_EOL . $output_script_line_2 . PHP_EOL . PHP_EOL;
 
 			}
 
