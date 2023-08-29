@@ -32,10 +32,10 @@ function jmwp_admin_page_postmeta_insert_tool() {
 	
 	echo '<p>2 fields. Tab separated.<br />Field 1: Post ID<br />Field 2: Postmeta value</p>';
 
-	echo '<textarea id="textarea-import-data" name="import-data" placeholder="data to import" style="width:100%;">'.$import_data.'</textarea>';
+	echo '<textarea id="textarea-import-data" name="import-data" placeholder="data to import" style="width:100%; height:10em;">'.$import_data.'</textarea>';
 
-	echo '<p>meta_key: <input type="text" name="import-data-meta-key" placeholder="import data meta key" value="'.$import_data_meta_key.'" /></p>';
-	echo '<p>ACF field ID?: <input type="text" name="import-data-acf-field-id" placeholder="ACF field ID" value="'.$import_data_acf_field_id.'" /></p>';
+	echo '<p>meta_key: <input type="text" name="import-data-meta-key" placeholder="import data meta key" style="width:25%;"value="'.$import_data_meta_key.'" /></p>';
+	echo '<p>ACF field ID?: <input type="text" name="import-data-acf-field-id" placeholder="ACF field ID" style="width:25%;"value="'.$import_data_acf_field_id.'" /></p>';
 
 	// action buttons
 	echo '<p><input type="submit" name="submit" value="Generate Postmeta Insert Script" /></p>';
@@ -98,10 +98,8 @@ function jmwp_admin_page_postmeta_insert_tool() {
 			}
 
 			//begin output
-			echo '<textarea id="textarea-output-data-script" name="output-data-script" placeholder="output script" style="width:100%;">';
-
+			echo '<textarea id="textarea-output-data-script" name="output-data-script" placeholder="output script" style="width:100%; height:10em;">';
 			echo $output_script;
-
 			echo '</textarea>';
 
 		}
